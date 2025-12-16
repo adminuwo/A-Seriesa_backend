@@ -1,3 +1,19 @@
+
+
+import fs from "fs";
+
+if (process.env.GOOGLE_CREDENTIALS_BASE64) {
+  const decodedKey = Buffer.from(
+    process.env.GOOGLE_CREDENTIALS_BASE64,
+    "base64"
+  ).toString("utf-8");
+
+  fs.writeFileSync("/tmp/gcp-key.json", decodedKey);
+
+  process.env.GOOGLE_APPLICATION_CREDENTIALS = "/tmp/gcp-key.json";
+}
+
+
 import {
   FunctionDeclarationSchemaType,
   HarmBlockThreshold,
@@ -5,7 +21,7 @@ import {
   VertexAI
 }from '@google-cloud/vertexai';
 
-const project = 'ai-mall-480206';
+const project = process.env.GCP_PROJECT_ID;
 const location = 'us-central1';
 const textModel =  'gemini-2.5-pro';
 const visionModel = 'gemini-2.5-pro';
