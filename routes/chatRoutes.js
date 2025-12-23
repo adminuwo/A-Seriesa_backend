@@ -26,7 +26,6 @@ router.post("/", async (req, res) => {
     for await (const chunk of streamingResult.stream) {
       const text =
         chunk?.candidates?.[0]?.content?.parts?.[0]?.text || null;
-
     }
 
 
@@ -66,7 +65,7 @@ router.get('/:sessionId', async (req, res) => {
 });
 
 // Create or Update message in session
-router.post('/:sessionId/message', async (req, res) => {
+router.post('/:sessionId/message',verifyToken, async (req, res) => {
   try {
     const { sessionId } = req.params;
     const { message, title } = req.body;
