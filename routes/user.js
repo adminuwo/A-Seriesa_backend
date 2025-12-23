@@ -6,9 +6,7 @@ const route = express.Router()
 route.get("/", verifyToken, async (req, res) => {
     try {
 
-        console.log(req.user.id);
         const userId = req.user.id
-
         const user = await userModel.findById(userId)
         res.status(200).json(user)
     } catch (error) {
