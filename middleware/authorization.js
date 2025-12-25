@@ -13,13 +13,11 @@ export const verifyToken = (req, res, next) => {
          req.user = null;
         return res.status(401).json({ message: "Invalid token format" });
     }
-    console.log("token:",token);
     
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
-        console.log("token:",decoded);
         
         next();
         

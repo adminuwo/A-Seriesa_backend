@@ -1,0 +1,357 @@
+
+Timestamp: 2025-12-23T11:24:14.607Z
+Error: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds: Set
+Stack: GoogleAuthError: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+    at C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\models\generative_models.js:63:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:93:16)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-23T11:25:23.813Z
+Error: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds: Set
+Stack: GoogleAuthError: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+    at C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\models\generative_models.js:63:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:93:16)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-23T11:25:40.249Z
+Error: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds: Set
+Stack: GoogleAuthError: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+    at C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\models\generative_models.js:63:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:93:16)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-23T11:26:05.559Z
+Error: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: GoogleAuthError: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+    at C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\models\generative_models.js:63:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:93:16)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-23T11:26:43.648Z
+Error: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: GoogleAuthError: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+    at C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\models\generative_models.js:63:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:93:16)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-23T11:31:40.123Z
+Error: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: GoogleAuthError: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+    at C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\models\generative_models.js:63:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:93:16)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-23T11:35:15.457Z
+Error: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: GoogleAuthError: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+    at C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\models\generative_models.js:63:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:93:16)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-23T11:38:56.243Z
+Error: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: GoogleAuthError: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+    at C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\models\generative_models.js:63:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:93:16)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-23T11:45:27.673Z
+Error: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: GoogleAuthError: [VertexAI.GoogleAuthError]: 
+Unable to authenticate your request        
+Depending on your run time environment, you can get authentication by        
+- if in local instance or cloud shell: `!gcloud auth login`        
+- if in Colab:        
+    -`from google.colab import auth`        
+    -`auth.authenticate_user()`        
+- if in service account or other: please follow guidance in https://cloud.google.com/docs/authentication
+    at C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\models\generative_models.js:63:19
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:93:16)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-25T10:15:12.807Z
+Error: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: ClientError: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+    at throwErrorIfNotOK (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\post_fetch_processing.js:32:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:101:5)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-25T10:17:12.398Z
+Error: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: ClientError: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+    at throwErrorIfNotOK (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\post_fetch_processing.js:32:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:101:5)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-25T10:30:10.453Z
+Error: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: ClientError: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+    at throwErrorIfNotOK (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\post_fetch_processing.js:32:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:101:5)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-25T10:30:21.786Z
+Error: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: ClientError: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+    at throwErrorIfNotOK (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\post_fetch_processing.js:32:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:101:5)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-25T10:33:56.010Z
+Error: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: ClientError: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+    at throwErrorIfNotOK (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\post_fetch_processing.js:32:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:101:5)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-25T10:34:09.977Z
+Error: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: ClientError: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+    at throwErrorIfNotOK (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\post_fetch_processing.js:32:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:101:5)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-25T10:41:26.777Z
+Error: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-flash` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: ClientError: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-1.5-flash` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+    at throwErrorIfNotOK (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\post_fetch_processing.js:32:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:101:5)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-25T11:21:43.559Z
+Error: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-3-pro-preview` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: ClientError: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-3-pro-preview` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+    at throwErrorIfNotOK (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\post_fetch_processing.js:32:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:101:5)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------
+
+Timestamp: 2025-12-25T11:28:29.044Z
+Error: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-3-pro-preview` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+Code: undefined
+Env Project: ai-mall-480206
+Env Creds Path: 'C:\Users\Intel\Desktop\key\ai-mall-480206-b4b7da478633.json'
+Creds File Exists: true
+Stack: ClientError: [VertexAI.ClientError]: got status: 404 Not Found. {"error":{"code":404,"message":"Publisher Model `projects/ai-mall-480206/locations/us-central1/publishers/google/models/gemini-3-pro-preview` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions","status":"NOT_FOUND"}}
+    at throwErrorIfNotOK (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\post_fetch_processing.js:32:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async generateContentStream (C:\Users\Intel\Desktop\work space\AI-MALL_Backend\node_modules\@google-cloud\vertexai\build\src\functions\generate_content.js:101:5)
+    at async file:///C:/Users/Intel/Desktop/work%20space/AI-MALL_Backend/routes/chatRoutes.js:44:29
+-------------------------------------------

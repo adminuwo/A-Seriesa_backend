@@ -1,5 +1,5 @@
 import express, { urlencoded } from "express";
- import dotenv from "dotenv";
+import dotenv from "dotenv";
 import 'dotenv/config';
 import cors from "cors";
 import connectDB from "./config/db.js";
@@ -10,9 +10,12 @@ import authRoutes from "./routes/authRoutes.js";
 import cookieParser from "cookie-parser";
 import emailVatifiation from "./routes/emailVerification.js"
 import userRoute from './routes/user.js'
+import aibaseRoutes from './routes/aibaseRoutes.js'
+import fileUpload from 'express-fileupload';
+
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT 
+const PORT = process.env.PORT
 // Connect to Database
 connectDB();
 
@@ -22,7 +25,8 @@ app.use(cors());
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
-// app.use()
+app.use(fileUpload()); // For AIBASE file uploads
+
 app.get("/", (req, res) => {
   res.send("All working")
 })
@@ -32,7 +36,7 @@ app.use('/api/auth', authRoutes);
 
 //Get user Route
 
-app.use('/api/user',userRoute)
+app.use('/api/user', userRoute)
 
 // Chat Routes: /api/chat (GET sessions), /api/chat/:id (GET history), /api/chat/:id/message (POST message)
 app.use('/api/chat', chatRoutes);
@@ -45,6 +49,9 @@ app.use('/api/agents', agentRoutes);
 
 //email varification route 
 app.use("/api/email_varification", emailVatifiation)
+
+// AIBASE Routes: /api/aibase/chat, /api/aibase/knowledge
+app.use('/api/aibase', aibaseRoutes);
 
 
 // Global Error Handler

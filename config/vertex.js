@@ -21,12 +21,40 @@ import {
   VertexAI
 } from '@google-cloud/vertexai';
 
-const project = process.env.GCP_PROJECT_ID;
-const location = 'us-central1';
+const keyFilePath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+let project = process.env.GCP_PROJECT_ID;
+
+if (keyFilePath && fs.existsSync(keyFilePath)) {
+  try {
+    const fileContent = fs.readFileSync(keyFilePath, 'utf8');
+    const keyData = JSON.parse(fileContent);
+    if (keyData.project_id) {
+      project = keyData.project_id;
+      console.log(`[VertexConfig] Loaded Project ID '${project}' from credentials file.`);
+    }
+  } catch (error) {
+    console.error('[VertexConfig] Failed to read project_id from credentials file:', error.message);
+  }
+}
+
+if (!project) {
+  console.warn('[VertexConfig] GCP_PROJECT_ID is not set. Vertex AI may fail.');
+}
+
+const location = process.env.GCP_LOCATION || 'us-central1';
 const textModel = 'gemini-2.5-pro';
 const visionModel = 'gemini-2.5-pro';
 
-const vertexAI = new VertexAI({ project: project, location: location });
+console.log(`[VertexConfig] Initiating Vertex AI with Project: ${project}, Location: ${location}, Model: ${textModel}`);
+
+const vertexAI = new VertexAI({
+  project: project,
+  location: location,
+  googleAuthOptions: {
+    keyFile: keyFilePath,
+    scopes: ['https://www.googleapis.com/auth/cloud-platform']
+  }
+});
 
 // Instantiate Gemini models
 export const generativeModel = vertexAI.getGenerativeModel({
