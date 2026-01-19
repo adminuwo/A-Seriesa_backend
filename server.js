@@ -23,6 +23,8 @@ import revenueRoutes from './routes/revenueRoutes.js';
 import supportRoutes from './routes/supportRoutes.js';
 import personalTaskRoutes from './routes/personalTaskRoutes.js';
 import feedbackRoutes from './routes/feedbackRoutes.js';
+import voiceRoutes from './routes/voiceRoutes.js';
+import paymentRoutes from './routes/paymentRoutes.js';
 
 
 dotenv.config();
@@ -37,7 +39,12 @@ connectDB().then(() => {
 
 // Middleware
 
-app.use(cors());
+app.use(cors({
+  origin: true, // Allow any origin in development
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(cookieParser())
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
@@ -102,6 +109,10 @@ app.use('/api/support', supportRoutes);
 app.use('/api/personal-task', personalTaskRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/personal-assistant/tasks', personalTaskRoutes);
+app.use('/api/payments', paymentRoutes);
+
+// Voice Routes
+app.use('/api/voice', voiceRoutes);
 
 
 // Global Error Handler
@@ -112,4 +123,8 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`AI-Mall Backend running on  http://localhost:${PORT}`);
+  console.log("Razorpay Config Check:", {
+    KeyID: process.env.RAZORPAY_KEY_ID ? `${process.env.RAZORPAY_KEY_ID.substring(0, 8)}...` : "MISSING",
+    Secret: process.env.RAZORPAY_KEY_SECRET ? "PRESENT" : "MISSING"
+  });
 });
