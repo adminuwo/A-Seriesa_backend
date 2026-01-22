@@ -34,6 +34,9 @@ router.get('/admin/stats', async (req, res) => {
       Report.find().sort({ timestamp: -1 }).limit(3)
     ]);
 
+    console.log('[ADMIN STATS] Total agents found:', agents.length);
+    console.log('[ADMIN STATS] Agent names:', agents.map(a => a.agentName));
+
     const activeAgentsCount = agents.length;
 
     // Financial calculations - Reset to 0 as requested
@@ -57,6 +60,16 @@ router.get('/admin/stats', async (req, res) => {
       }))
     ].sort((a, b) => new Date(b.time) - new Date(a.time)).slice(0, 5);
 
+    const inventory = agents.map(a => ({
+      id: a._id,
+      name: a.agentName,
+      pricing: a.pricing?.type || 'Free',
+      status: a.status || 'Inactive',
+      reviewStatus: a.reviewStatus || 'Draft'
+    }));
+
+    console.log('[ADMIN STATS] Inventory count:', inventory.length);
+
     res.json({
       totalUsers: totalUsers,
       activeAgents: activeAgentsCount,
@@ -71,13 +84,7 @@ router.get('/admin/stats', async (req, res) => {
         status: 'N/A',
         nextPayout: 'Pending Sales'
       },
-      inventory: agents.map(a => ({
-        id: a._id,
-        name: a.agentName,
-        pricing: a.pricing?.type || 'Free',
-        status: a.status || 'Inactive',
-        reviewStatus: a.reviewStatus || 'Draft'
-      }))
+      inventory
     });
   } catch (err) {
     console.error('[ADMIN STATS ERROR]', err);

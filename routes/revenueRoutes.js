@@ -117,8 +117,11 @@ router.get('/transactions', verifyToken, async (req, res) => {
     try {
         const vendorId = req.user.id;
 
-        // Fetch transactions for this vendor, populate agent details
-        const transactions = await Transaction.find({ vendorId })
+        // Fetch transactions for this vendor, only paid ones, populate agent details
+        const transactions = await Transaction.find({
+            vendorId,
+            amount: { $gt: 0 }
+        })
             .populate('agentId', 'agentName')
             .sort({ createdAt: -1 });
 
@@ -143,8 +146,8 @@ router.get('/transactions', verifyToken, async (req, res) => {
 // GET /api/revenue/admin/transactions - Get ALL platform transactions (Admin only)
 router.get('/admin/transactions', verifyToken, async (req, res) => {
     try {
-        // Fetch ALL transactions across the platform
-        const transactions = await Transaction.find()
+        // Fetch ALL paid transactions across the platform
+        const transactions = await Transaction.find({ amount: { $gt: 0 } })
             .populate('agentId', 'agentName')
             .populate('vendorId', 'name email')
             .populate('buyerId', 'name email')
@@ -169,6 +172,27 @@ router.get('/admin/transactions', verifyToken, async (req, res) => {
     } catch (err) {
         console.error('[ADMIN TRANSACTION HISTORY ERROR]', err);
         res.status(500).json({ error: 'Failed to fetch transactions' });
+    }
+});
+
+// GET /api/revenue/user/transactions - Get user's purchase history
+router.get('/user/transactions', verifyToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        // Fetch transactions where this user is the buyer and it's a paid transaction
+        const transactions = await Transaction.find({
+            buyerId: userId,
+            amount: { $gt: 0 } // Only show paid transactions
+        })
+            .populate('agentId', 'agentName')
+            .sort({ createdAt: -1 });
+
+        res.json(transactions);
+
+    } catch (err) {
+        console.error('[USER TRANSACTION HISTORY ERROR]', err);
+        res.status(500).json({ error: 'Failed to fetch user transactions' });
     }
 });
 

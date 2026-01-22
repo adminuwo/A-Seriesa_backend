@@ -63,6 +63,8 @@ router.post('/create-order', verifyToken, async (req, res) => {
 // POST /api/payments/verify
 router.post('/verify', verifyToken, async (req, res) => {
     try {
+        console.log('[PAYMENT VERIFY] Request received:', req.body);
+
         const {
             razorpay_order_id,
             razorpay_payment_id,
@@ -72,46 +74,114 @@ router.post('/verify', verifyToken, async (req, res) => {
             plan
         } = req.body;
 
+        if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+            console.error('[PAYMENT VERIFY] Missing Razorpay fields');
+            return res.status(400).json({ error: 'Missing payment details' });
+        }
+
+        console.log('[PAYMENT VERIFY] User ID:', req.user.id);
+        console.log('[PAYMENT VERIFY] Agent ID:', agentId);
+
         const sign = razorpay_order_id + "|" + razorpay_payment_id;
+        const secret = process.env.RAZORPAY_KEY_SECRET;
+
+        if (!secret) {
+            console.error('[PAYMENT VERIFY] RAZORPAY_KEY_SECRET is missing in env');
+            return res.status(500).json({ error: 'Server configuration error: payment secret missing' });
+        }
+
         const expectedSign = crypto
-            .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+            .createHmac("sha256", secret)
             .update(sign.toString())
             .digest("hex");
 
+        console.log('[PAYMENT VERIFY] Expected Sign:', expectedSign);
+        console.log('[PAYMENT VERIFY] Received Sign:', razorpay_signature);
+        console.log('[PAYMENT VERIFY] Signature match:', razorpay_signature === expectedSign);
+
         if (razorpay_signature === expectedSign) {
             // Payment successful
+            console.log('[PAYMENT VERIFY] Signature verified successfully');
 
             // 1. Fetch Agent to find Vendor
             const agent = await Agent.findById(agentId);
             if (!agent) {
+                console.error('[PAYMENT VERIFY] Agent not found:', agentId);
                 return res.status(404).json({ error: 'Agent not found' });
             }
+            console.log('[PAYMENT VERIFY] Agent found:', agent.agentName);
 
             // 2. Create Transaction Record
-            const transaction = new Transaction({
+            // Handle missing owner (default to buyer or a system ID if owner is not set)
+            const vendorId = agent.owner || req.user.id;
+
+            const transactionData = {
                 transactionId: razorpay_payment_id,
                 buyerId: req.user.id,
-                vendorId: agent.owner,
+                vendorId: vendorId,
                 agentId: agentId,
-                amount: amount,
-                platformFee: amount * 0.5, // 50% commission
-                netAmount: amount * 0.5,
+                amount: Number(amount),
+                platformFee: Number(amount) * 0.5, // 50% commission
+                netAmount: Number(amount) * 0.5,
                 status: 'Success',
-            });
+            };
+
+            console.log('[PAYMENT VERIFY] Creating transaction with data:', transactionData);
+
+            const transaction = new Transaction(transactionData);
             await transaction.save();
+            console.log('[PAYMENT VERIFY] Transaction saved:', transaction._id);
 
             // 3. Add Agent to User
-            await User.findByIdAndUpdate(req.user.id, {
-                $addToSet: { agents: agentId }
-            });
+            console.log('[PAYMENT VERIFY] Adding agent to user update start...');
+            console.log('[PAYMENT VERIFY] Target User ID:', req.user?.id);
+            console.log('[PAYMENT VERIFY] Target Agent ID:', agentId);
 
-            return res.json({ message: "Payment verified successfully", success: true });
+            if (!req.user || !req.user.id) {
+                console.error('[PAYMENT VERIFY] No user ID in token');
+                return res.status(401).json({ error: 'User identification failed from token' });
+            }
+
+            const userDoc = await User.findById(req.user.id);
+            if (!userDoc) {
+                console.error('[PAYMENT VERIFY] User not found in DB with ID:', req.user.id);
+                return res.json({
+                    message: "Payment verified but user profile not found. Please contact support.",
+                    success: true,
+                    warning: "User profile link failed"
+                });
+            }
+
+            console.log('[PAYMENT VERIFY] Current user agents before:', userDoc.agents);
+
+            // Standardize agent ID comparison
+            const alreadyHasAgent = userDoc.agents.some(id => id && id.toString() === agentId.toString());
+
+            if (!alreadyHasAgent) {
+                userDoc.agents.push(agentId);
+                await userDoc.save();
+                console.log('[PAYMENT VERIFY] Agent added successfully. New count:', userDoc.agents.length);
+            } else {
+                console.log('[PAYMENT VERIFY] User already had this agent. No update needed.');
+            }
+
+            return res.json({
+                message: "Payment verified successfully",
+                success: true,
+                agentCount: userDoc.agents.length,
+                userId: userDoc._id
+            });
         } else {
+            console.error('[PAYMENT VERIFY] Invalid signature');
             return res.status(400).json({ error: "Invalid payment signature", success: false });
         }
     } catch (err) {
         console.error('[RAZORPAY VERIFY ERROR]', err);
-        res.status(500).json({ error: 'Failed to verify payment' });
+        res.status(500).json({
+            error: 'Failed to verify payment',
+            details: err.message,
+            stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+        });
     }
 });
 
