@@ -122,7 +122,7 @@ export const Verification_Email_Template = `
         <div class="footer">
             <p><strong>AI Mall</strong> - Your Gateway to Intelligent AI Agents</p>
             <p>&copy; ${new Date().getFullYear()} AI Mall. All rights reserved.</p>
-            <p>Need help? Contact us at <a href="mailto:support@aimall.com">support@aimall.com</a></p>
+            <p>Need help? Contact us at <a href="mailto:admin@uwo24.com">admin@uwo24.com</a></p>
         </div>
     </div>
 </body>
@@ -320,7 +320,7 @@ export const Welcome_Email_Template = `
         <div class="footer">
             <p><strong>AI Mall</strong> - Empowering You with Intelligent AI Solutions</p>
             <p>&copy; ${new Date().getFullYear()} AI Mall. All rights reserved.</p>
-            <p>Need assistance? Reach out to us at <a href="mailto:support@aimall.com">support@aimall.com</a></p>
+            <p>Need assistance? Reach out to us at <a href="mailto:admin@uwo24.com">admin@uwo24.com</a></p>
             <p style="margin-top: 10px;">
                 <a href="{privacyUrl}">Privacy Policy</a> | 
                 <a href="{termsUrl}">Terms of Service</a>

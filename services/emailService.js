@@ -5,7 +5,7 @@ const EMAIL_CONFIG = {
     service: process.env.EMAIL_SERVICE || 'gmail',
     user: process.env.EMAIL_USER || 'your-email@gmail.com',
     password: process.env.EMAIL_PASSWORD || 'your-app-password',
-    adminEmail: process.env.ADMIN_EMAIL || 'admin@aimall.com'
+    adminEmail: process.env.ADMIN_EMAIL || 'admin@uwo24.com'
 };
 
 // Create transporter

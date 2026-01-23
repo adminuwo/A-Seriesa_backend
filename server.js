@@ -25,6 +25,7 @@ import personalTaskRoutes from './routes/personalTaskRoutes.js';
 import feedbackRoutes from './routes/feedbackRoutes.js';
 import voiceRoutes from './routes/voiceRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
 
 
 dotenv.config();
@@ -110,6 +111,9 @@ app.use('/api/personal-task', personalTaskRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/personal-assistant/tasks', personalTaskRoutes);
 app.use('/api/payments', paymentRoutes);
+
+// Contact Routes
+app.use('/api/contact', contactRoutes);
 
 // Voice Routes
 app.use('/api/voice', voiceRoutes);
