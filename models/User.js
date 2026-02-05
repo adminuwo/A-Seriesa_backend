@@ -43,7 +43,9 @@ const userSchema = new mongoose.Schema({
         emailNotif: { type: Boolean, default: true },
         pushNotif: { type: Boolean, default: false },
         publicProfile: { type: Boolean, default: true },
-        twoFactor: { type: Boolean, default: false }
+        twoFactor: { type: Boolean, default: false },
+        language: { type: String, default: "English" },
+        region: { type: String, default: "World" }
     }
 
 }, { timestamps: true });

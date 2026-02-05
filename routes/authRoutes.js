@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import UserModel from "../models/User.js";
 import generateTokenAndSetCookies from "../utils/generateTokenAndSetCookies.js";
 import { generateOTP } from "../utils/verifiacitonCode.js";
-import { sendVerificationEmail, sendResetPasswordEmail, sendPasswordChangeSuccessEmail } from "../utils/Email.js";
+import { sendVerificationEmail, sendResetPasswordEmail, sendPasswordChangeSuccessEmail, sendResetPasswordOTPEmail } from "../utils/Email.js";
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
@@ -227,6 +227,98 @@ router.post("/reset-password/:token", async (req, res) => {
   } catch (err) {
     console.error("Reset Password Error:", err);
     res.status(500).json({ error: "Server error during reset password" });
+  }
+});
+
+
+// ====================== FORGOT PASSWORD OTP FLOW =======================
+router.post("/send-forgot-otp", async (req, res) => {
+  try {
+    const { email, lang } = req.body;
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found with this email" });
+    }
+
+    const otp = generateOTP();
+    user.resetPasswordToken = await bcrypt.hash(otp, 10); // Hashing OTP for security
+    user.resetPasswordExpires = Date.now() + 900000; // 15 mins
+    await user.save();
+
+    await sendResetPasswordOTPEmail(user.email, user.name, otp, lang);
+
+    res.status(200).json({ message: "OTP Sent Successfully" });
+
+  } catch (err) {
+    console.error("Forgot Password OTP Error:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+router.post("/verify-forgot-otp", async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+    const user = await UserModel.findOne({
+      email,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ error: "Invalid or expired OTP" });
+    }
+
+    const isMatch = await bcrypt.compare(otp, user.resetPasswordToken);
+    if (!isMatch) {
+      return res.status(400).json({ error: "Invalid OTP" });
+    }
+
+    // Return a temporary token to authorize the password reset step
+    // Using a simpler approach: just return success, pass email and otp (or a signed token) to next step
+    // For security, let's generate a short-lived JWT specifically for reset
+    // But since I don't want to overcomplicate Imports, I'll just use a specific "verified" flag or a temporary "reset_authorized_token" in DB?
+    // User already has resetPasswordToken (hashed OTP). We can't use that for authorizing the next step easily unless we pass the plaintext OTP again.
+
+    // Better: Generate a specialized Reset Token that is NOT the OTP.
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    user.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+    await user.save();
+
+    res.status(200).json({ message: "OTP Verified", resetToken });
+
+  } catch (err) {
+    console.error("Verify OTP Error:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+router.post("/reset-password-otp", async (req, res) => {
+  try {
+    const { email, resetToken, newPassword, lang } = req.body;
+    const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+
+    const user = await UserModel.findOne({
+      email,
+      resetPasswordToken: hashedToken,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ error: "Invalid session or expired" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    await sendPasswordChangeSuccessEmail(user.email, user.name, lang);
+    res.status(200).json({ message: "Password Updated Successfully" });
+
+  } catch (err) {
+    console.error("Reset Pass Error:", err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 

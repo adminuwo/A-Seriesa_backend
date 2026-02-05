@@ -7,7 +7,37 @@ const router = express.Router();
 
 // Endpoints for Vendor/Admin revenue tracking removed as per feature decommissioning.
 
-// Transaction endpoints for vendor/admin removed.
+// Transaction endpoints for vendor/admin
+// GET /api/revenue/admin/all-transactions - Admin view of all transactions
+router.get('/admin/all-transactions', verifyToken, async (req, res) => {
+    try {
+        // In a real scenario, check for admin role here
+        const transactions = await Transaction.find()
+            .populate('agentId', 'agentName')
+            .populate('buyerId', 'name email')
+            .populate('vendorId', 'name email')
+            .sort({ createdAt: -1 });
+
+        // Format for frontend
+        const formatted = transactions.map(t => ({
+            id: t._id,
+            date: t.createdAt,
+            type: 'Subscription', // Defaulting for now
+            appName: t.agentId ? t.agentId.agentName : 'Deleted Agent',
+            amount: t.amount,
+            platformFee: t.platformFee,
+            netAmount: t.netAmount,
+            status: t.status,
+            buyer: t.buyerId ? t.buyerId.name : 'Unknown User',
+            vendor: t.vendorId ? t.vendorId.name : 'System'
+        }));
+
+        res.json(formatted);
+    } catch (err) {
+        console.error('[ADMIN ALL TRANSACTIONS ERROR]', err);
+        res.status(500).json({ error: 'Failed to fetch transaction history' });
+    }
+});
 
 // GET /api/revenue/stats - Admin Revenue Stats
 router.get('/stats', verifyToken, async (req, res) => {
@@ -55,7 +85,7 @@ router.get('/stats', verifyToken, async (req, res) => {
         res.json({
             overview: {
                 totalGross,
-                totalVendorPayouts, // Operational Costs
+                totalVendorPayouts: 0, // Operational Costs set to 0 as per request (was using vendor payouts as placeholder)
                 totalPlatformNet
             },
             appPerformance

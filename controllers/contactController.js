@@ -87,7 +87,7 @@ export const submitContact = async (req, res) => {
         await transporter.sendMail({
           from: process.env.EMAIL,
           to: email,
-          subject: 'We received your message - A-Series Support',
+          subject: 'We received your message - A-Series™ Support',
           html: `
             <h2>Thank you for contacting us!</h2>
             <p>Hi ${name},</p>
@@ -99,7 +99,7 @@ export const submitContact = async (req, res) => {
               <li><strong>Reference ID:</strong> ${contactSubmission._id}</li>
             </ul>
             <p>If you have any urgent matters, please call us at <strong>+91 83589 90909</strong></p>
-            <p>Best regards,<br>A-Series Support Team</p>
+            <p>Best regards,<br>A-Series™ Support Team</p>
           `,
         });
         console.log('✅ Confirmation email sent to user');
@@ -274,7 +274,7 @@ export const updateSubmissionStatus = async (req, res) => {
             <p>${response.replace(/\n/g, '<br>')}</p>
             <hr>
             <p>If you have further questions, feel free to contact us again.</p>
-            <p>Best regards,<br>A-Series Support Team</p>
+            <p>Best regards,<br>A-Series™ Support Team</p>
           `,
         });
         console.log('✅ Response email sent');

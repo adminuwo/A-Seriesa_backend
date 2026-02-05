@@ -39,27 +39,77 @@ route.put("/", verifyToken, async (req, res) => {
     }
 })
 
-// GET /api/user/all - Admin only, fetch all users with details
+// PUT /api/user/avatar - Update user avatar/profile picture
+route.put("/avatar", verifyToken, async (req, res) => {
+    try {
+        // Import upload and uploadToCloudinary dynamically
+        const { upload, uploadToCloudinary } = await import('../services/cloudinary.service.js');
+
+        // Use multer middleware
+        upload.single('avatar')(req, res, async (err) => {
+            if (err) {
+                console.error("Multer error:", err);
+                return res.status(400).json({ error: "File upload error", details: err.message });
+            }
+
+            if (!req.file) {
+                return res.status(400).json({ error: "No file uploaded" });
+            }
+
+            try {
+                const userId = req.user.id;
+
+                // Upload to Cloudinary
+                const result = await uploadToCloudinary(req.file.buffer, {
+                    folder: 'profile_avatars',
+                    resource_type: 'image',
+                    transformation: [
+                        { width: 400, height: 400, crop: 'fill', gravity: 'face' },
+                        { quality: 'auto' }
+                    ]
+                });
+
+                // Update user's avatar field in database
+                const updatedUser = await userModel.findByIdAndUpdate(
+                    userId,
+                    { avatar: result.secure_url },
+                    { new: true }
+                ).select('-password');
+
+                res.status(200).json({
+                    message: "Avatar updated successfully",
+                    user: updatedUser,
+                    avatarUrl: result.secure_url
+                });
+
+            } catch (uploadError) {
+                console.error("Cloudinary upload error:", uploadError);
+                res.status(500).json({ error: "Failed to upload image to cloud storage" });
+            }
+        });
+
+    } catch (error) {
+        console.error("Error updating avatar:", error);
+        res.status(500).json({ error: "Something went wrong" });
+    }
+});
+
 route.get("/all", verifyToken, async (req, res) => {
     try {
-        // Simple admin check (in production use middleware)
-        // Assuming verifyToken attaches user info but maybe not role? 
-        // We'll trust the request or fetch the user to check role if strictly needed.
-        // For now, let's fetch all users.
-
-        const users = await userModel.find({ role: 'user' })
+        const users = await userModel.find({})
             .populate('agents', 'agentName pricing')
             .select('-password');
 
         // Fetch all transactions to map spend
-        // Optimization: Aggregate all transactions by userId
         const transactions = await Transaction.aggregate([
             { $match: { status: 'Success' } },
-            { $group: { _id: "$userId", totalSpent: { $sum: "$amount" } } }
+            { $group: { _id: "$buyerId", totalSpent: { $sum: "$amount" } } }
         ]);
 
         const spendMap = transactions.reduce((acc, curr) => {
-            acc[curr._id.toString()] = curr.totalSpent;
+            if (curr._id) {
+                acc[curr._id.toString()] = curr.totalSpent;
+            }
             return acc;
         }, {});
 
@@ -68,7 +118,8 @@ route.get("/all", verifyToken, async (req, res) => {
             name: user.name,
             email: user.email,
             role: user.role,
-            status: user.isVerified ? 'Active' : 'Pending',
+            isBlocked: user.isBlocked || false,
+            status: user.isBlocked ? 'Blocked' : (user.isVerified ? 'Active' : 'Pending'),
             agents: user.agents || [],
             spent: spendMap[user._id.toString()] || 0
         }));

@@ -22,6 +22,9 @@ export const verifyToken = (req, res, next) => {
         next();
 
     } catch (error) {
+        console.error(`[AUTH ERROR] Token verification failed for token: ${token.substring(0, 10)}...`);
+        console.error(`[AUTH ERROR] Reason: ${error.message}`);
+        console.error(`[AUTH ERROR] ExpiredAt: ${error.expiredAt}`);
         return res.status(401).json({ error: "Invalid or expired token" });
     }
 };

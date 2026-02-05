@@ -8,7 +8,8 @@ const route = express.Router()
 
 //get all agents
 route.get("/", async (req, res) => {
-  const agents = await agentModel.find()
+  // Filter out Inactive/Draft agents from the public list
+  const agents = await agentModel.find({ status: { $nin: ['Inactive', 'inactive', 'Draft'] } })
   res.status(200).json(agents)
 })
 
@@ -29,32 +30,50 @@ route.get("/test-user/:userId", async (req, res) => {
 //create agents
 route.post('/', verifyToken, async (req, res) => {
   try {
-    const { agentName, description, category, avatar, url, pricing, pricingModel } = req.body;
+    const { agentName, description, category, avatar, url, agentUrl, pricing, pricingModel } = req.body;
 
-    console.log('[AGENT CREATE] Request data:', { agentName, category, avatar, url, pricingModel });
+    const finalUrl = url || agentUrl || "";
 
-    // Generate slug manually (pre-save hook won't run before validation)
-    const slug = agentName
+    console.log('[AGENT CREATE] Request data:', { agentName, category, avatar, finalUrl, pricingModel });
+
+    // Generate slug manually
+    let slug = agentName
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-+|-+$/g, '');
 
+    // Check if slug exists to avoid collision error
+    const existingAgent = await agentModel.findOne({ slug });
+    if (existingAgent) {
+      slug = `${slug}-${Math.random().toString(36).substring(2, 7)}`;
+    }
+
     console.log('[AGENT CREATE] Generated slug:', slug);
+
+    // Flexible pricing handling
+    let finalPricing = pricing;
+    if (typeof pricing === 'string') {
+      finalPricing = { type: pricing, plans: [] };
+    } else if (!pricing) {
+      finalPricing = { type: pricingModel || 'Free', plans: [] };
+    }
 
     const newAgent = await agentModel.create({
       agentName,
       description,
       category,
-      avatar,
-      url,
-      slug,  // Provide the slug to pass validation
-      pricing: pricing || { type: 'Free', plans: [] },
-      pricingModel: pricingModel || 'Free',
-      status: 'Live',
-      reviewStatus: 'Approved',
+      avatar: avatar || "/AGENTS_IMG/default.png",
+      url: finalUrl,
+      slug,
+      pricing: finalPricing,
+      pricingModel: pricingModel || (typeof pricing === 'string' ? pricing : 'Free'),
+      status: 'Inactive',     // Default to Inactive so it doesn't show in Marketplace
+      reviewStatus: 'Draft',  // Default to Draft
       owner: req.user.id
     });
 
+    // Do NOT link to user inventory automatically. 
+    // Creators must explicitly subscribe if they want to use the agent in the chat interface.
     console.log('[AGENT CREATED]', newAgent.agentName, 'with slug:', newAgent.slug, 'ID:', newAgent._id);
     res.status(201).json(newAgent);
   } catch (err) {
@@ -219,22 +238,43 @@ route.put('/:id', verifyToken, async (req, res) => {
 
 route.delete('/:id', verifyToken, async (req, res) => {
   try {
-    // Soft delete: Mark as Inactive and reset reviewStatus to Draft
-    const agent = await agentModel.findByIdAndUpdate(
-      req.params.id,
-      {
-        status: 'Inactive',
-        reviewStatus: 'Draft'
-      },
-      { new: true }
-    );
+    const agentId = req.params.id;
+
+    // Check for hard delete flag?force=true
+    const forceDelete = req.query.force === 'true';
+
+    let agent;
+    if (forceDelete) {
+      // Hard delete: Remove from DB entirely
+      agent = await agentModel.findByIdAndDelete(agentId);
+      console.log(`[AGENT DELETED] ID: ${agentId}. Permanently removed from database.`);
+    } else {
+      // Soft delete: Mark as Inactive and reset reviewStatus to Draft
+      agent = await agentModel.findByIdAndUpdate(
+        agentId,
+        {
+          status: 'Inactive',
+          reviewStatus: 'Draft'
+        },
+        { new: true }
+      );
+      console.log(`[AGENT SUSPENDED] ID: ${agentId}. Marked Inactive.`);
+    }
 
     if (!agent) {
       return res.status(404).json({ error: "Agent not found" });
     }
 
-    res.json({ message: "Agent marked as inactive", agent });
+    // CLEANUP: Remove this agent from ALL users' inventories ("My Agents")
+    // This ensures no one has a "broken" or "inactive" agent in their personal list
+    await userModel.updateMany(
+      { agents: agentId },
+      { $pull: { agents: agentId } }
+    );
+
+    res.json({ message: forceDelete ? "Agent permanently deleted" : "Agent marked as inactive", agent });
   } catch (err) {
+    console.error("[AGENT DELETE ERROR]", err);
     res.status(500).json({ error: err.message });
   }
 });

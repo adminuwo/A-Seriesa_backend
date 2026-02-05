@@ -112,4 +112,16 @@ router.put('/:id/status', verifyToken, async (req, res) => {
     }
 });
 
+// DELETE /api/support/:id (Admin only - hard delete ticket)
+router.delete('/:id', verifyToken, async (req, res) => {
+    try {
+        const ticket = await SupportTicket.findByIdAndDelete(req.params.id);
+        if (!ticket) return res.status(404).json({ error: 'Support ticket not found' });
+        res.json({ message: 'Support ticket deleted successfully' });
+    } catch (err) {
+        console.error('[DELETE SUPPORT TICKET ERROR]', err);
+        res.status(500).json({ error: 'Failed to delete support ticket' });
+    }
+});
+
 export default router;

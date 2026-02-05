@@ -29,4 +29,20 @@ router.put('/:id/read', verifyToken, async (req, res) => {
     }
 });
 
+// Delete notification
+router.delete('/:id', verifyToken, async (req, res) => {
+    try {
+        const result = await notificationModel.findOneAndDelete({
+            _id: req.params.id,
+            userId: req.user.id
+        });
+        if (!result) {
+            return res.status(404).json({ error: "Notification not found" });
+        }
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 export default router;
