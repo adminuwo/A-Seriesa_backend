@@ -150,7 +150,7 @@ router.get('/settings/public', async (req, res) => {
     // Only return safe fields
     res.json({
       platformName: settings.platformName || 'A-Series™',
-      supportPhone: settings.supportPhone || '+91 98765 43210',
+      supportPhone: settings.supportPhone || '+91 83598 90909',
       announcement: settings.announcement || '',
       allowPublicSignup: settings.allowPublicSignup ?? true,
       contactEmail: settings.contactEmail || 'support@a-series.in'
@@ -160,7 +160,7 @@ router.get('/settings/public', async (req, res) => {
     // Return defaults on error to prevent frontend crash
     res.json({
       platformName: 'A-Series™',
-      supportPhone: '+91 98765 43210',
+      supportPhone: '+91 83598 90909',
       announcement: '',
       allowPublicSignup: true,
       contactEmail: 'support@a-series.in'

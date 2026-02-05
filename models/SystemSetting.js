@@ -11,7 +11,7 @@ const systemSettingSchema = mongoose.Schema({
     },
     supportPhone: {
         type: String,
-        default: '+91 98765 43210'
+        default: '+91 83598 90909'
     },
     announcement: {
         type: String,

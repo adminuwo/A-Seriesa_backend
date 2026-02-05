@@ -98,7 +98,7 @@ export const submitContact = async (req, res) => {
               <li><strong>Category:</strong> ${category}</li>
               <li><strong>Reference ID:</strong> ${contactSubmission._id}</li>
             </ul>
-            <p>If you have any urgent matters, please call us at <strong>+91 83589 90909</strong></p>
+            <p>If you have any urgent matters, please call us at <strong>+91 83598 90909</strong></p>
             <p>Best regards,<br>A-Series™ Support Team</p>
           `,
         });
